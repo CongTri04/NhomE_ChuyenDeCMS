@@ -16,107 +16,96 @@
 
 get_header();
 ?>
+<!-- Styles -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+    .post-container {
+        width: 700px;
+        max-width: 100%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+    }
+    .post-header {
+        background-color: #f1f1f1;
+        padding: 23px;
+        border-bottom: none; /* Xóa viền dưới */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .post-body h2 {
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        position: relative;
+        top: -25.8px;
+        font-weight: normal;
+        background-color: #fff;
+        border-bottom: none; /* Xóa viền dưới */
+		opacity: 0.9; /* Làm cho chữ mờ đi */
+    }
+    .post-body {
+        padding: 15px;
+        position: relative; /* Thêm position relative để điều chỉnh vị trí */
+        top: -20px; /* Di chuyển hộp thoại lên trên */
+    }
+    .post-body textarea {
+        width: 100%;
+        height: 80px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 14px;
+        resize: none;
+    }
+    .post-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 15px;
+        margin-top: -10px;
+    }
+    .post-footer .share-button {
+        display: inline-block; /* Giúp liên kết hành xử như nút bấm */
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 12px 15px; /* Độ đệm cho nút */
+        font-size: 14px; /* Kích thước chữ */
+        font-weight: normal;
+		margin-bottom: 3px;
+        text-decoration: none; /* Loại bỏ gạch chân khỏi liên kết */
+        border-radius: 5px; /* Bo góc cho nút */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp mượt mà khi hover */
+    }
+    .post-footer .share-button:hover {
+        background-color: #0056b3; /* Màu tối hơn khi hover */
+    }
+</style>
 
 <main id="site-content">
-
-	<?php
-
-	$archive_title    = '';
-	$archive_subtitle = '';
-
-	if ( is_search() ) {
-		/**
-		 * @global WP_Query $wp_query WordPress Query object.
-		 */
-		global $wp_query;
-
-		$archive_title = sprintf(
-			'%1$s %2$s',
-			'<span class="color-accent">' . __( 'Search:', 'twentytwenty' ) . '</span>',
-			'&ldquo;' . get_search_query() . '&rdquo;'
-		);
-
-		if ( $wp_query->found_posts ) {
-			$archive_subtitle = sprintf(
-				/* translators: %s: Number of search results. */
-				_n(
-					'We found %s result for your search.',
-					'We found %s results for your search.',
-					$wp_query->found_posts,
-					'twentytwenty'
-				),
-				number_format_i18n( $wp_query->found_posts )
-			);
-		} else {
-			$archive_subtitle = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'twentytwenty' );
-		}
-	} elseif ( is_archive() && ! have_posts() ) {
-		$archive_title = __( 'Nothing Found', 'twentytwenty' );
-	} elseif ( ! is_home() ) {
-		$archive_title    = get_the_archive_title();
-		$archive_subtitle = get_the_archive_description();
-	}
-
-	if ( $archive_title || $archive_subtitle ) {
-		?>
-
-		<header class="archive-header has-text-align-center header-footer-group">
-
-			<div class="archive-header-inner section-inner medium">
-
-				<?php if ( $archive_title ) { ?>
-					<h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
-				<?php } ?>
-
-				<?php if ( $archive_subtitle ) { ?>
-					<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
-				<?php } ?>
-
-			</div><!-- .archive-header-inner -->
-
-		</header><!-- .archive-header -->
-
-		<?php
-	}
-
-	if ( have_posts() ) {
-
-		$i = 0;
-
-		while ( have_posts() ) {
-			++$i;
-			if ( $i > 1 ) {
-				echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-			}
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-		}
-	} elseif ( is_search() ) {
-		?>
-
-		<div class="no-search-results-form section-inner thin">
-
-			<?php
-			get_search_form(
-				array(
-					'aria_label' => __( 'search again', 'twentytwenty' ),
-				)
-			);
-			?>
-
-		</div><!-- .no-search-results -->
-
-		<?php
-	}
-	?>
-
-	<?php get_template_part( 'template-parts/pagination' ); ?>
-
+    <div class="container my-5">
+        <div class="post-container">
+            <div class="post-header">
+             
+            </div>
+            <div class="post-body">
+                <h2>Make a Post</h2>
+                <textarea placeholder="What are you thinking..."></textarea>
+            </div>
+            <div class="post-footer">
+                <a href="<?php echo get_permalink(get_page_by_path('news')); ?>" class="share-button">share</a>
+            </div>
+        </div>
+    </div>
 </main><!-- #site-content -->
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
-
-<?php
-get_footer();
+<?php get_template_part('template-parts/footer-menus-widgets'); ?>
+<?php get_footer(); ?>
