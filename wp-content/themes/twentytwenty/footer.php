@@ -13,6 +13,87 @@
  */
 
 ?>
+<style>
+	@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+	#footer h1 {
+		padding-left: 20px; /* Di chuyển chữ sang phải nhẹ nhàng */
+		margin-bottom: 30px;
+	}	
+ 
+</style>
 <footer id="site-footer" class="header-footer-group">
 
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -31,7 +112,7 @@
 				<div class="row">
 					<div class="col-xs-4 col-sm-4 col-md-4">
 						<ul class="list-unstyled quick-links">
-							<h1 style="color: white; ">| Quick links</h1>
+							<h1 style="color: white; ">| Comment</h1>
 							<?php
 							$categories = get_categories(); // Lấy danh sách danh mục
 							foreach ($categories as $category) {
@@ -42,7 +123,7 @@
 					</div>
 					<div class="col-xs-4 col-sm-4 col-md-4">
 						<ul class="list-unstyled quick-links">
-							<h1 style="color: white; ">| Quick links</h1>
+							<h1 style="color: white; ">| Categories</h1>
 
 							<?php
 							$categories = get_categories(); // Lấy danh sách danh mục
@@ -54,7 +135,7 @@
 					</div>
 					<div class="col-xs-4 col-sm-4 col-md-4">
 						<ul class="list-unstyled quick-links">
-							<h1 style="color: white; ">| Quick links</h1>
+							<h1 style="color: white; ">| Last post</h1>
 
 							<?php
 							$categories = get_categories(); // Lấy danh sách danh mục
