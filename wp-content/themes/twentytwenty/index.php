@@ -27,11 +27,10 @@ get_header();
     }
     .news-container {
         background-color: #00bcd4;
-        padding: 20px 20px 0; /* Adjusted padding: keep top and sides, remove bottom */
+        padding: 20px 20px 0;
         max-width: 700px;
         margin: 0 auto;
         border-radius: 8px;
-        position: relative; /* Optional, in case you want to position elements relative to this container */
     }
     .news-item {
         display: flex;
@@ -73,6 +72,15 @@ get_header();
         font-size: 16px;
         font-weight: bold;
         margin-left: 30px; 
+
+    }
+    .news-content a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .news-content a:hover {
+        text-decoration: underline;
     }
     .view-all {
         display: inline-block;
@@ -105,7 +113,9 @@ get_header();
                 </div>
                 <div class="year">23</div>
             </div>
-            <div class="news-content">Sinh viên vượt khó, đạt thành tích nổi bật</div>
+            <div class="news-content">
+                <a href="<?php echo get_permalink(get_page_by_path('sinh-vien-vuot-kho')); ?>">Sinh viên vượt khó, đạt thành tích nổi bật</a>
+            </div>
         </div>
         <div class="news-item">
             <div class="news-date">
@@ -116,7 +126,9 @@ get_header();
                 </div>
                 <div class="year">23</div>
             </div>
-            <div class="news-content">Livestream với chủ đề: Thiết kế đồ họa - Phác họa tương lai</div>
+            <div class="news-content">
+                <a href="<?php echo get_permalink(get_page_by_path('thiet-ke-do-hoa-phac-hoa-tuong-lai')); ?>">Livestream với chủ đề: Thiết kế đồ họa - Phác họa tương lai</a>
+            </div>
         </div>
         <div class="news-item">
             <div class="news-date">
@@ -127,7 +139,9 @@ get_header();
                 </div>
                 <div class="year">23</div>
             </div>
-            <div class="news-content">Livestream với chủ đề: Làm chủ công nghệ cùng Gen Z</div>
+            <div class="news-content">
+                <a href="<?php echo get_permalink(get_page_by_path('lam-chu-cong-nghe-cung-gen-z')); ?>">Livestream với chủ đề: Làm chủ công nghệ cùng Gen Z</a>
+            </div>
         </div>
         <a href="<?php echo get_permalink(get_page_by_path('news')); ?>" class="view-all">XEM TẤT CẢ TIN TỨC</a>
     </div>
@@ -138,7 +152,3 @@ get_header();
 <?php
 get_footer();
 ?>
-
-
-
-
