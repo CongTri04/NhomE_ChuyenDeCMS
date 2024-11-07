@@ -33,7 +33,6 @@
                     <input type="submit" class="search-submit" value="Submit" />
                 </form>
             </div>
-
             <!-- Các mục điều hướng khác -->
             <a href="#" class="cate-item">Thể thao</a>
             <a href="#" class="cate-item">Khoa học</a>
@@ -50,9 +49,6 @@
                     <i class="fas fa-search icon"></i>
                     <?php _e('Search', 'twentytwenty'); ?>
                 </a>
-
-
-
                 <!-- Khu vực tài khoản người dùng -->
                 <div class="account-container">
                     <i class="fas fa-user-circle account-icon"></i>
@@ -88,7 +84,6 @@
 </script>
 
 <style>
-    /* Đảm bảo dropdown bị ẩn mặc định */
     .navbar .right-menu .dropdown {
         display: none;
         position: absolute;
