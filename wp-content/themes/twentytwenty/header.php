@@ -71,6 +71,14 @@
     } ?>
 
     <?php wp_footer(); ?>
+    <script>
+        // Hàm toggle để mở và đóng dropdown khi nhấn vào Account
+        function toggleDropdown() {
+            var dropdown = document.getElementById("account-dropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+    </script>
+
 </body>
 
 </html>
@@ -84,7 +92,103 @@
 </script>
 
 <style>
-    .navbar .right-menu .dropdown {
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        background-color: #f8f8f8;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .navbar .logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    .navbar .nav-item {
+        margin-right: 20px;
+        color: #333;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .navbar .nav-item:hover {
+        text-decoration: none;
+    }
+
+    .navbar .search-container {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+    }
+
+    .navbar .search-container input[type="text"] {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 5px;
+        height: 36px;
+        /* Chiều cao bằng với nút submit */
+    }
+
+    .navbar .search-container input[type="submit"] {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        /* Màu nền trắng */
+        color: #333;
+        /* Màu chữ đen */
+        cursor: pointer;
+        height: 36px;
+        /* Chiều cao cố định */
+    }
+
+    .navbar .search-container input[type="submit"]:hover {
+        background-color: #e0e0e0;
+        /* Màu nền khi hover */
+        text-decoration: none;
+    }
+
+    .navbar .right-menu {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar .right-menu .nav-item {
+        margin-right: 20px;
+    }
+
+    .navbar .right-menu .icon {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .navbar .right-menu .account {
+        position: relative;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .navbar .right-menu .account .icon {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .navbar .right-menu .account:hover .dropdown {
+        display: block;
+    }
+
+    .navbar .right-menu .account .dropdown {
         display: none;
         position: absolute;
         top: 100%;
@@ -93,6 +197,18 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         z-index: 1;
         min-width: 160px;
+    }
+
+    .navbar .right-menu .account .dropdown a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .navbar .right-menu .account .dropdown a:hover {
+        background-color: #f1f1f1;
     }
 
     /* Thiết kế cho các liên kết trong dropdown */
@@ -133,9 +249,22 @@
         font-size: 10px;
     }
 
-    /* Khi hover vào khu vực tài khoản, dropdown vẫn không hiện */
-    .navbar .right-menu .account-container:hover .dropdown {
-        display: none;
+    .cate-item {
+        margin-right: 40px;
+        /* Thêm khoảng cách giữa các mục */
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+    .logo-item {
+        margin-left: 20px;
+        /* Thêm khoảng cách giữa các mục */
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        display: inline-block;
     }
 
     /* Thiết kế cho ô tìm kiếm và nút submit */
@@ -167,33 +296,6 @@
         background-color: #e9e9e9;
     }
 
-    .cate-item {
-        margin-right: 40px;
-        /* Thêm khoảng cách giữa các mục */
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        display: inline-block;
-    }
-
-    .logo {
-        margin-left: 20px;
-        /* Thêm khoảng cách giữa các mục */
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        display: inline-block;
-    }
-
-    .logo-item {
-        margin-left: 20px;
-        /* Thêm khoảng cách giữa các mục */
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        display: inline-block;
-    }
-
     .search-modal {
         display: none;
     }
@@ -201,4 +303,21 @@
     .search-modal.active {
         display: block;
     }
+    /* Đảm bảo rằng dropdown sẽ bị ẩn mặc định */
+.dropdown {
+    display: none; /* Ẩn dropdown */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 160px;
+}
+
+/* Hiển thị dropdown khi người dùng nhấn vào */
+.account:hover .dropdown {
+    display: block; /* Hiển thị dropdown khi hover */
+}
+
 </style>
