@@ -8,10 +8,13 @@
         </div>
         <div class="col-md-2 col-xs-3">
             <div class="circle">
-                <div class="date">
-                    <span class="day"><?php echo get_the_date('d'); ?></span>
-                    <span class="month"><?php echo get_the_date('m'); ?></span>
-                    <span class="year"><?php echo get_the_date('y'); ?></span>
+                <div class="news-date">
+                    <div class="day-month">
+                        <div class="day"><?php echo get_the_date('d'); ?></div>
+                        <div class="separator"></div>
+                        <div class="month"><?php echo get_the_date('m'); ?></div>
+                    </div>
+                    <div class="year"><?php echo get_the_date('y'); ?></div>
                 </div>
             </div>
         </div>
@@ -58,33 +61,48 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .date {
+    .news-date {
+        color: black;
+        font-size: 14px;
         text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .news-date .day-month {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .day-month .day,
+    .day-month .month {
+        margin: 0;
+    }
+
+    .day-month .separator {
+        width: 20px;
+        height: 1px;
+        background-color: black;
+        margin: 2px 0;
+    }
+
+    .news-date .year {
         font-size: 14px;
-        color: #000;
-        line-height: 1.2;
+        font-weight: bold;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+        height: 100%;
     }
 
-    .date .day {
-        display: block;
-    }
 
-    .date .month {
-        display: block;
-        border-top: 1px solid #000;
-        margin-top: 0px;
-    }
-
-    .date .year {
-        position: absolute;
-        top: 30px;
-        right: 15px;
-        font-size: 14px;
-    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
