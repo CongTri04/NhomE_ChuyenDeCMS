@@ -15,63 +15,26 @@
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-	<!-- Chèn phần danh mục ở đây -->
-	<?php if (is_single()) : ?>
+	<div class="post-container" style="display: flex; justify-content: space-between;">
+		<!-- Phần danh mục bên trái -->
 		<div class="category-sidebar" style="width: 25%; margin-right: 20px;">
-			<?php get_template_part('template-parts/category'); ?>
+			<?php if (is_single()) : ?>
+				<?php get_template_part('template-parts/category'); ?>
+			<?php endif; ?>
+
 		</div>
-	<?php endif; ?>
-	
-	<?php
 
-	get_template_part('template-parts/entry-header');
+		<!-- Phần chi tiết bài viết ở giữa -->
 
-	if (! is_search()) {
-		get_template_part('template-parts/featured-image');
-	}
+		<?php if (is_single()) : ?>
+			<?php get_template_part('template-parts/detail'); ?>
+		<?php endif; ?>
 
-	?>
-
-	<div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
-
-		<div class="entry-content">
-
-			<?php
-			if (is_search() || ! is_singular() && 'summary' === get_theme_mod('blog_content', 'full')) {
-				the_excerpt();
-			} else {
-				the_content(__('Continue reading', 'twentytwenty'));
-			}
-			?>
-
-		</div><!-- .entry-content -->
-
-	</div><!-- .post-inner -->
-
-	<div class="section-inner">
-		<?php
-		wp_link_pages(
-			array(
-				'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__('Page', 'twentytwenty') . '"><span class="label">' . __('Pages:', 'twentytwenty') . '</span>',
-				'after'       => '</nav>',
-				'link_before' => '<span class="page-number">',
-				'link_after'  => '</span>',
-			)
-		);
-
-		edit_post_link();
-
-		// Single bottom post meta.
-		twentytwenty_the_post_meta(get_the_ID(), 'single-bottom');
-
-		if (post_type_supports(get_post_type(get_the_ID()), 'author') && is_single()) {
-
-			get_template_part('template-parts/entry-author-bio');
-		}
-		?>
-
-	</div><!-- .section-inner -->
-
+		<!-- Phần bổ sung ở bên phải -->
+		<div class="additional-sidebar" style="width: 20%;">
+			<?php get_template_part('template-parts/comment'); ?>
+		</div>
+	</div><!-- .post-container -->
 	<?php
 
 	if (is_single()) {
@@ -90,10 +53,10 @@
 
 			<?php comments_template(); ?>
 
-		</div><!-- .comments-wrapper -->
+		</div><!-- .comments-wrapper -->A
 
 	<?php
 	}
 	?>
-
-</article><!-- .post -->
+	
+</article>

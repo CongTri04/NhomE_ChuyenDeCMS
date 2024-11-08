@@ -41,7 +41,6 @@ if ( empty( $twentytwenty_aria_label ) && ! empty( $args['label'] ) ) {
 
 <style>
     body {
-        background-color: #f5f0e6;
         font-family: Arial, sans-serif;
     }
     .search-index {
@@ -53,7 +52,7 @@ if ( empty( $twentytwenty_aria_label ) && ! empty( $args['label'] ) ) {
         padding: 10px;
         width: 700px;
         margin: 50px auto;
-		padding-top: 20px;		
+		padding-top: 20px;	    	
     }
     .search-index i {
         font-size: 20px;

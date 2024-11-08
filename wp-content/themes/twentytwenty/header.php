@@ -93,233 +93,205 @@
 
 <style>
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
 
-    .navbar {
-        display: flex;
-        align-items: center;
-        background-color: #f8f8f8;
-        padding: 10px 20px;
-        border-bottom: 1px solid #ddd;
-    }
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
 
-    .navbar .logo {
-        font-size: 24px;
-        font-weight: bold;
-        margin-right: 20px;
-    }
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
 
-    .navbar .nav-item {
-        margin-right: 20px;
-        color: #333;
-        text-decoration: none;
-        text-align: center;
-    }
+.navbar .nav-item {
+    margin-right: 20px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+}
 
-    .navbar .nav-item:hover {
-        text-decoration: none;
-    }
+.navbar .nav-item:hover {
+    text-decoration: none;
+}
 
-    .navbar .search-container {
-        display: flex;
-        align-items: center;
-        margin-right: auto;
-    }
+.navbar .search-container {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 50px;
+}
 
-    .navbar .search-container input[type="text"] {
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-right: 5px;
-        height: 36px;
-        /* Chiều cao bằng với nút submit */
-    }
+.navbar .search-container input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+    height: 36px;
+}
 
-    .navbar .search-container input[type="submit"] {
-        padding: 5px 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #fff;
-        /* Màu nền trắng */
-        color: #333;
-        /* Màu chữ đen */
-        cursor: pointer;
-        height: 36px;
-        /* Chiều cao cố định */
-    }
+.navbar .search-container input[type="submit"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    height: 36px;
+}
 
-    .navbar .search-container input[type="submit"]:hover {
-        background-color: #e0e0e0;
-        /* Màu nền khi hover */
-        text-decoration: none;
-    }
+.navbar .search-container input[type="submit"]:hover {
+    background-color: #e0e0e0;
+}
 
-    .navbar .right-menu {
-        display: flex;
-        align-items: center;
-    }
+.navbar .right-menu {
+    display: flex;
+    align-items: center;
+}
 
-    .navbar .right-menu .nav-item {
-        margin-right: 20px;
-    }
+.navbar .right-menu .nav-item {
+    margin-right: 20px;
+    display: inline;
+}
 
-    .navbar .right-menu .icon {
-        display: block;
-        margin-bottom: 5px;
-    }
+.navbar .right-menu .icon {
+    display: block;
+    margin-bottom: 5px;
+}
 
-    .navbar .right-menu .account {
-        position: relative;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        flex-direction: column;
-        cursor: pointer;
-    }
+.navbar .account-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
 
-    .navbar .right-menu .account .icon {
-        display: block;
-        margin-bottom: 5px;
-    }
+.navbar .account-container .account-text {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
 
-    .navbar .right-menu .account:hover .dropdown {
-        display: block;
-    }
+.navbar .account-container .account-text i {
+    margin-left: 2px;
+    font-size: 10px;
+}
 
-    .navbar .right-menu .account .dropdown {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: #fff;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        min-width: 160px;
-    }
+.navbar .account-container .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 160px;
+}
 
-    .navbar .right-menu .account .dropdown a {
-        color: #333;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-    }
+.navbar .account-container .dropdown a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
 
-    .navbar .right-menu .account .dropdown a:hover {
-        background-color: #f1f1f1;
-    }
+.navbar .account-container .dropdown a:hover {
+    background-color: #f1f1f1;
+}
 
-    /* Thiết kế cho các liên kết trong dropdown */
-    .navbar .right-menu .dropdown a {
-        color: #333;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-    }
+.cate-item {
+    margin-right: 40px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: inline-block;
+}
 
-    .navbar .right-menu .dropdown a:hover {
-        background-color: #f1f1f1;
-    }
+.logo-item {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: inline-block;
+}
 
-    .navbar .right-menu .account-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 14px;
-        color: #666;
-    }
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 5px;
+}
 
-    .navbar .right-menu .account-icon {
-        font-size: 24px;
-        margin-bottom: 5px;
-    }
+.search-submit {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-    .navbar .right-menu .account-text {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        /* Thêm cursor pointer để cho thấy đây là khu vực có thể click */
-    }
+.search-submit:hover {
+    background-color: #e9e9e9;
+}
 
-    .navbar .right-menu .account-text i {
-        margin-left: 2px;
-        font-size: 10px;
-    }
+.search-modal {
+    display: none;
+}
 
-    .cate-item {
-        margin-right: 40px;
-        /* Thêm khoảng cách giữa các mục */
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        display: inline-block;
-    }
+.search-modal.active {
+    display: block;
+}
 
-    .logo-item {
-        margin-left: 20px;
-        /* Thêm khoảng cách giữa các mục */
-        text-decoration: none;
-        color: #333;
-        font-size: 16px;
-        display: inline-block;
-    }
+/* Hiển thị dropdown khi hover */
+.account-container:hover .dropdown {
+    display: block;
+}
+/* Điều chỉnh kích thước icon và chữ trong navbar */
+.navbar .nav-item .icon {
+    font-size: 28px; /* Tăng kích thước icon */
+    margin-bottom: 8px; /* Tạo khoảng cách dưới icon để cân đối */
+}
 
-    /* Thiết kế cho ô tìm kiếm và nút submit */
-    .search-container {
-        display: flex;
-        align-items: center;
-        margin-left: 50px;
-    }
+.navbar .nav-item {
+    font-size: 18px; /* Tăng kích thước chữ trong các mục menu */
+    margin-right: 20px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+}
 
-    .search-input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        outline: none;
-        font-size: 16px;
-        margin-right: 5px;
-    }
+.navbar .account-container .account-text {
+    font-size: 16px; /* Tăng kích thước chữ của account */
+    color: #666;
+    display: flex;
+    align-items: center;
+}
 
-    .search-submit {
-        padding: 10px 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #f9f9f9;
-        cursor: pointer;
-        font-size: 16px;
-    }
+.navbar .account-container .account-text i {
+    font-size: 18px; /* Tăng kích thước của mũi tên dropdown */
+    margin-left: 5px;
+}
 
-    .search-submit:hover {
-        background-color: #e9e9e9;
-    }
-
-    .search-modal {
-        display: none;
-    }
-
-    .search-modal.active {
-        display: block;
-    }
-
-    /* Đảm bảo rằng dropdown sẽ bị ẩn mặc định */
-    .dropdown {
-        display: none;
-        /* Ẩn dropdown */
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: #fff;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        min-width: 160px;
-    }
-
-    /* Hiển thị dropdown khi người dùng nhấn vào */
-    .account:hover .dropdown {
-        display: block;
-        /* Hiển thị dropdown khi hover */
-    }
+.navbar .right-menu .icon {
+    font-size: 15px; /* Phóng to icon trong menu bên phải */
+    margin-bottom: 5px;
+}
+.account-icon{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
 </style>
