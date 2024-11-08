@@ -29,6 +29,16 @@
     <div class="post-content">
         <?php the_content(); ?>
     </div>
+
+    <footer class="post-footer mt-4">
+        <?php if (is_single()) : ?>
+            <div class="post-navigation d-flex justify-content-between">
+                <?php previous_post_link('<div class="nav-previous">%link</div>', 'Previous Post'); ?>
+                <?php next_post_link('<div class="nav-next">%link</div>', 'Next Post'); ?>
+            </div>
+        <?php endif; ?>
+    </footer>
+
 </article>
 <style>
     /* General Styles */
