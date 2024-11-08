@@ -175,19 +175,10 @@ if (post_password_required()) {
     </div>
     <div class="post-body">
         <h2>Make a Post</h2>
-        <?php
-        comment_form(
-			array(
-				'class_form'         => 'section-inner thin max-percentage',
-				'title_reply'        => '',
-				'comment_field'      => '<textarea placeholder="What are you thinking..." name="comment" class="comment-textarea"></textarea>',
-				'title_reply_before' => '',
-				'title_reply_after'  => '',
-				'label_submit'       => '',
-				'submit_button'      => '<a href="#" onclick="document.getElementById(\'commentform\').submit();" class="share-button">Share</a>',
-				'submit_field'       => '%1$s %2$s',
-			)
-		);
-        ?>
+        <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post" id="custom-comment-form" class="section-inner thin max-percentage">
+            <textarea placeholder="What are you thinking..." name="comment" class="comment-textarea"></textarea>
+            <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
+            <a href="#" onclick="document.getElementById('custom-comment-form').submit();" class="share-button">Share</a>
+        </form>
     </div>
 </div>
