@@ -1,61 +1,110 @@
-<?php
-/**
- * Displays the next and previous post navigation in single posts.
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
+<div class="post-navigation container " style="width: 60%;">
+        <?php if (get_previous_post()) : ?>
+            <div class="nav-item">
+                <div class="nav-date">
+                    <div class="nav-day-month">
+                        <div class="nav-day"><?php echo get_the_date('d', get_previous_post()); ?></div>
+                        <div class="line"></div>
+                        <div class="nav-month"><?php echo get_the_date('m', get_previous_post()); ?></div>
+                    </div>
+                    <div class="nav-year"><?php echo get_the_date('y', get_previous_post()); ?></div>
+                </div>
+                <div class="post-title">
+                    <?php previous_post_link('%link', '%title'); ?>
+                </div>
+            </div>
+        <?php endif; ?>
 
-$next_post = get_next_post();
-$prev_post = get_previous_post();
+        <?php if (get_next_post()) : ?>
+            <div class="nav-item">
+                <div class="nav-date">
+                    <div class="nav-day-month">
+                        <div class="nav-day"><?php echo get_the_date('d', get_next_post()); ?></div>
+                        <div class="line"></div>
+                        <div class="nav-month"><?php echo get_the_date('m', get_next_post()); ?></div>
+                    </div>
+                    <div class="nav-year"><?php echo get_the_date('y', get_next_post()); ?></div>
+                </div>
+                <div class="post-title">
+                    <?php next_post_link('%link', '%title'); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</article>
+<style>
 
-if ( $next_post || $prev_post ) {
 
-	$pagination_classes = '';
+    /* prev-next */
+    .nav-date {
+        color: black;
+        font-size: 14px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
 
-	if ( ! $next_post ) {
-		$pagination_classes = ' only-one only-prev';
-	} elseif ( ! $prev_post ) {
-		$pagination_classes = ' only-one only-next';
-	}
+    .nav-date .nav-day-month {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-	?>
+    .nav-day-month .nav-day,
+    .nav-day-month .nav-month {
+        margin: 0;
+    }
 
-	<nav class="pagination-single section-inner<?php echo esc_attr( $pagination_classes ); ?>" aria-label="<?php esc_attr_e( 'Post', 'twentytwenty' ); ?>">
+    .nav-day-month .line {
+        width: 20px;
+        height: 1px;
+        background-color: black;
+        margin: 2px 0;
+    }
 
-		<hr class="styled-separator is-style-wide" aria-hidden="true" />
+    .nav-date .nav-year {
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+    }
 
-		<div class="pagination-single-inner">
+    /* Navigation Styling */
+    .post-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 50px;
+        font-size: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: auto;
+    }
 
-			<?php
-			if ( $prev_post ) {
-				?>
+    .nav-item {
+        display: flex;
+        align-items: center;
+        color: #333;
+        padding: 20px;
+    }
 
-				<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
-					<span class="arrow" aria-hidden="true">&larr;</span>
-					<span class="title"><span class="title-inner"><?php echo wp_kses_post( get_the_title( $prev_post->ID ) ); ?></span></span>
-				</a>
+    .nav-item .nav-date {
+        font-size: 11px;
+        color: #000;
+        margin-right: 50px;
+    }
 
-				<?php
-			}
+    /* Điều chỉnh màu tiêu đề prev và next */
+    .nav-item .post-title {
+        font-size: 17px;
+        font-weight: bold;
 
-			if ( $next_post ) {
-				?>
 
-				<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>">
-					<span class="arrow" aria-hidden="true">&rarr;</span>
-						<span class="title"><span class="title-inner"><?php echo wp_kses_post( get_the_title( $next_post->ID ) ); ?></span></span>
-				</a>
-				<?php
-			}
-			?>
+    }
 
-		</div><!-- .pagination-single-inner -->
+</style>
 
-		<hr class="styled-separator is-style-wide" aria-hidden="true" />
-
-	</nav><!-- .pagination-single -->
-
-	<?php
-}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
