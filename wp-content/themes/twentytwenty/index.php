@@ -74,16 +74,23 @@ get_header();
         while (have_posts()) {
             the_post();
             ?>
-            <div class="news-item">
-                <div class="news-date">
-                    <div class="day"><?php echo get_the_date('d'); ?></div>
-                    <div class="month"><?php echo strtoupper(get_the_date('F')); ?></div>
-                </div>
-                <div class="news-content">
-                    <a href="<?php the_permalink(); ?>"><h2> <?php the_title(); ?></h2></a>
-                    <p><?php echo wp_trim_words(get_the_excerpt(), 20, '[...]'); ?></p>
-                </div>
-            </div>
+           <div class="news-item">
+				<?php if (is_search() && has_post_thumbnail()): ?>
+					<div class="news-image">
+						<?php the_post_thumbnail('thumbnail'); ?> <!-- Hiển thị ảnh đại diện -->
+					</div>
+				<?php endif; ?>
+				<div class="news-date">
+					<div class="day"><?php echo get_the_date('d'); ?></div>
+					<div class="month"><?php echo strtoupper(get_the_date('F')); ?></div>
+				</div>
+				<div class="news-content">
+					<a href="<?php the_permalink(); ?>">
+						<h2> <?php the_title(); ?></h2>
+					</a>
+					<p><?php echo wp_trim_words(get_the_excerpt(), 20, '[...]'); ?></p>
+				</div>
+			</div>
             <?php
         }
         echo '</div>';

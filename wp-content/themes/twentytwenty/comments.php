@@ -8,11 +8,11 @@
  */
 ?>
 
-<div class="post-container">
+<div class="comment-container">
     <div class="post-header">
     </div>
     <div class="post-body">
-        <h2>Make a Post</h2>
+        <h2 class="tittle">Make a Post</h2>
         <textarea placeholder="What are you thinking..."></textarea>
     </div>
     <div class="post-footer">
@@ -22,7 +22,7 @@
 
 <!-- Styles -->
 <style>
-    .post-container {
+    .comment-container {
         width: 700px;
         max-width: 100%;
         background-color: #fff;
@@ -38,7 +38,7 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    .post-body h2 {
+    .post-body .tittle {
         margin: 0;
         font-size: 16px;
         color: #333;
