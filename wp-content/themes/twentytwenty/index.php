@@ -89,7 +89,7 @@ get_header();
         echo '</div>';
     } elseif (is_search()) {
         ?>
-        <div class="no-search-results-form section-inner thin">
+        <div class=""  style="background-color:#f6eedf;">
             <?php
             get_search_form(array('aria_label' => __('search again', 'twentytwenty')));
             ?>
