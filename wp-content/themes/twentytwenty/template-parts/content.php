@@ -12,7 +12,7 @@
             padding: 0;
         }
         .container {
-            width: 80%;
+            width: 40%;
             margin: 20px auto;
         }
         .news-item {
