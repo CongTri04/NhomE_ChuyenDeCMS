@@ -1,104 +1,171 @@
-<?php
-/**
- * The default template for displaying content
- *
- * Used for both singular and index.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
-$class ='';
-if(!is_single())
-{
-	$class ='danh-sach';
-}
-?>
+<article class="post-detail" id="post-<?php the_ID(); ?>">
 
-<article <?php post_class($class); ?> id="post-<?php the_ID(); ?>">
+    <div class="row">
+        <div class="col-md-10 col-xs-9">
+            <header class="post-header">
+                <h1 class="post-title"><?php the_title(); ?></h1>
+            </header>
+        </div>
+        <div class="col-md-2 col-xs-3">
+            <div class="circle">
+                <div class="date">
+                    <span class="day"><?php echo get_the_date('d'); ?></span>
+                    <span class="month"><?php echo get_the_date('m'); ?></span>
+                    <span class="year"><?php echo get_the_date('y'); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
 
-	<?php
+    <div class="underline mt-3"></div>
 
-	get_template_part( 'template-parts/entry-header' );
+    <?php if (has_post_thumbnail()) : ?>
+        <div class="post-thumbnail">
+            <?php the_post_thumbnail('large', ['class' => 'img-fluid rounded']); ?>
+        </div>
+    <?php endif; ?>
 
-	if ( ! is_search() ) {
-		get_template_part( 'template-parts/featured-image' );
-	}
+    <div class="post-content">
+        <?php the_content(); ?>
+    </div>
+</article>
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: whitesmoke;
+        margin: 0;
+        padding: 0;
+    }
 
-	?>
+    /* Post Detail Styling */
+    .post-detail {
+        width: 45%;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
 
-	<div class="post-inner <?php echo is_page_template( 'templates/template-full-width.php' ) ? '' : 'thin'; ?> ">
+    /* Circle Date Styling */
+    .circle {
+        width: 80px;
+        height: 80px;
+        background-color: #f1c40f;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-		<div class="entry-content">
+    .date {
+        text-align: center;
+        font-size: 14px;
+        color: #000;
+        line-height: 1.2;
+    }
 
-			<?php
-			if ( is_search() || ! is_singular() && 'summary' === get_theme_mod( 'blog_content', 'full' ) ) {
-				the_excerpt();
-			} else {
-				if (is_single()){
-					the_content( __( 'Continue reading', 'twentytwenty' ) );
-				}else{
-					$post = get_post();
-					echo substr($post->post_content,offset:0,length:0);
-				}
-				
-			}
-			?>
+    .date .day {
+        display: block;
+    }
 
-		</div><!-- .entry-content -->
+    .date .month {
+        display: block;
+        border-top: 1px solid #000;
+        margin-top: 0px;
+    }
 
-	</div><!-- .post-inner -->
+    .date .year {
+        position: absolute;
+        top: 30px;
+        right: 15px;
+        font-size: 14px;
+    }
 
-	<div class="section-inner">
-		<?php
-		wp_link_pages(
-			array(
-				'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__( 'Page', 'twentytwenty' ) . '"><span class="label">' . __( 'Pages:', 'twentytwenty' ) . '</span>',
-				'after'       => '</nav>',
-				'link_before' => '<span class="page-number">',
-				'link_after'  => '</span>',
-			)
-		);
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .circle {
+            width: 80px;
+            height: 80px;
+        }
 
-		edit_post_link();
+        .date .day,
+        .date .month {
+            font-size: 16px;
+        }
 
-		// Single bottom post meta.
-		twentytwenty_the_post_meta( get_the_ID(), 'single-bottom' );
+        .date .year {
+            font-size: 12px;
+            top: 25px;
+            right: 15px;
+        }
+    }
 
-		if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) && is_single() ) {
+    /* Other styling for the post content */
+    .post-header {
+        margin-bottom: 20px;
+    }
 
-			get_template_part( 'template-parts/entry-author-bio' );
+    .post-title {
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 2.1em;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
 
-		}
-		?>
+    .post-content {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+        margin-top: 30px;
+    }
 
-	</div><!-- .section-inner -->
+    .post-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
 
-	<?php
+    .post-navigation .nav-previous,
+    .post-navigation .nav-next {
+        font-size: 1em;
+        color: #007acc;
+    }
 
-	if ( is_single() ) {
+    .underline {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+        position: relative;
+    }
 
-		get_template_part( 'template-parts/navigation' );
+    .underline:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50px;
+        border-width: 12px 12px 0;
+        border-style: solid;
+        border-color: #cecece transparent;
+        display: block;
+        width: 0;
+    }
 
-	}
+    .underline::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 51px;
+        border-width: 11px 11px 0;
+        border-style: solid;
+        border-color: #f5f5f5 transparent;
+        display: block;
+        width: 0;
+    }
+</style>
 
-	/*
-	 * Output comments wrapper if it's a post, or if comments are open,
-	 * or if there's a comment number – and check for password.
-	 */
-	if ( ( is_single() || is_page() ) && ( comments_open() || get_comments_number() ) && ! post_password_required() ) {
-		?>
-
-		<div class="comments-wrapper section-inner">
-
-			<?php comments_template(); ?>
-
-		</div><!-- .comments-wrapper -->
-
-		<?php
-	}
-	?>
-
-</article><!-- .post -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
