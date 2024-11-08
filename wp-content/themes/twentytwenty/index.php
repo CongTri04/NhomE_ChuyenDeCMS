@@ -112,6 +112,8 @@ get_header();
 	}
 	?>
 <?php get_template_part( 'template-parts/comment' ); ?>
+
+<?php get_template_part( 'template-parts/pages' ); ?>
 	<?php get_template_part( 'template-parts/pagination' ); ?>
 
 </main><!-- #site-content -->
