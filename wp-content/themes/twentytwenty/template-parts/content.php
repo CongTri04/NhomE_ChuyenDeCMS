@@ -1,5 +1,4 @@
 <article class="post-detail" id="post-<?php the_ID(); ?>">
-
     <div class="row">
         <div class="col-md-10 col-xs-9">
             <header class="post-header">
@@ -8,15 +7,17 @@
         </div>
         <div class="col-md-2 col-xs-3">
             <div class="circle">
-                <div class="date">
-                    <span class="day"><?php echo get_the_date('d'); ?></span>
-                    <span class="month"><?php echo get_the_date('m'); ?></span>
-                    <span class="year"><?php echo get_the_date('y'); ?></span>
+                <div class="news-date">
+                    <div class="day-month">
+                        <div class="day"><?php echo get_the_date('d'); ?></div>
+                        <div class="separator"></div>
+                        <div class="month"><?php echo get_the_date('m'); ?></div>
+                    </div>
+                    <div class="year"><?php echo get_the_date('y'); ?></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row"></div>
 
     <div class="underline mt-3"></div>
 
@@ -29,29 +30,52 @@
     <div class="post-content">
         <?php the_content(); ?>
     </div>
-
-    <footer class="post-footer mt-4">
-        <?php if (is_single()) : ?>
-            <div class="post-navigation d-flex justify-content-between">
-                <?php previous_post_link('<div class="nav-previous">%link</div>', 'Previous Post'); ?>
-                <?php next_post_link('<div class="nav-next">%link</div>', 'Next Post'); ?>
+    <div class="post-navigation">
+        <?php if (get_previous_post()) : ?>
+            <div class="nav-item">
+                <div class="nav-date">
+                    <div class="nav-day-month">
+                        <div class="nav-day"><?php echo get_the_date('d', get_previous_post()); ?></div>
+                        <div class="line"></div>
+                        <div class="nav-month"><?php echo get_the_date('m', get_previous_post()); ?></div>
+                    </div>
+                    <div class="nav-year"><?php echo get_the_date('y', get_previous_post()); ?></div>
+                </div>
+                <div class="post-title">
+                    <?php previous_post_link('%link', '%title'); ?>
+                </div>
             </div>
         <?php endif; ?>
-    </footer>
 
+        <?php if (get_next_post()) : ?>
+            <div class="nav-item">
+                <div class="nav-date">
+                    <div class="nav-day-month">
+                        <div class="nav-day"><?php echo get_the_date('d', get_next_post()); ?></div>
+                        <div class="line"></div>
+                        <div class="nav-month"><?php echo get_the_date('m', get_next_post()); ?></div>
+                    </div>
+                    <div class="nav-year"><?php echo get_the_date('y', get_next_post()); ?></div>
+                </div>
+                <div class="post-title">
+                    <?php next_post_link('%link', '%title'); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
 </article>
 <style>
     /* General Styles */
     body {
         font-family: Arial, sans-serif;
-        background-color: whitesmoke;
+        background-color: #f0f0f0;
         margin: 0;
         padding: 0;
     }
 
     /* Post Detail Styling */
     .post-detail {
-        width: 45%;
+        width: 60%;
         margin: 50px auto;
         background-color: #fff;
         padding: 20px;
@@ -68,32 +92,132 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .date {
+    .news-date {
+        color: black;
+        font-size: 14px;
         text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .news-date .day-month {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .day-month .day,
+    .day-month .month {
+        margin: 0;
+    }
+
+    .day-month .separator {
+        width: 20px;
+        height: 1px;
+        background-color: black;
+        margin: 2px 0;
+    }
+
+    .news-date .year {
         font-size: 14px;
+        font-weight: bold;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    /* prev-next */
+    .nav-date {
+        color: black;
+        font-size: 14px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-date .nav-day-month {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .nav-day-month .nav-day,
+    .nav-day-month .nav-month {
+        margin: 0;
+    }
+
+    .nav-day-month .line {
+        width: 20px;
+        height: 1px;
+        background-color: black;
+        margin: 2px 0;
+    }
+
+    .nav-date .nav-year {
+        font-size: 14px;
+        font-weight: bold;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Navigation Styling */
+    .post-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 50px;
+        font-size: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: auto;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        color: #333;
+        padding: 20px;
+    }
+
+    .nav-item .nav-date {
+        font-size: 11px;
         color: #000;
-        line-height: 1.2;
+        margin-right: 50px;
     }
 
-    .date .day {
-        display: block;
+    /* Điều chỉnh màu tiêu đề prev và next */
+    .nav-item .post-title {
+        font-size: 17px;
+        font-weight: bold;
+
+
     }
 
-    .date .month {
-        display: block;
-        border-top: 1px solid #000;
-        margin-top: 0px;
-    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .circle {
+            width: 80px;
+            height: 80px;
+        }
 
-    .date .year {
-        position: absolute;
-        top: 30px;
-        right: 15px;
-        font-size: 14px;
+        .news-date .day,
+        .news-date .month {
+            font-size: 16px;
+        }
+
+        .news-date .year {
+            font-size: 12px;
+        }
     }
 
     /* Responsive adjustments */
@@ -120,16 +244,8 @@
         margin-bottom: 20px;
     }
 
-    .post-title {
-        font-family: 'Open Sans Condensed', sans-serif;
-        font-size: 2.1em;
-        font-weight: bold;
-        margin: 0;
-        padding: 0;
-    }
-
     .post-content {
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.6;
         color: #333;
         margin-top: 30px;
