@@ -74,6 +74,11 @@ get_header();
         while (have_posts()) {
             the_post();
             ?>
+            <?php
+            if ( is_search() ) {
+                get_template_part( 'template-parts/featured-image' );
+            }
+            ?>
             <div class="news-item">
                 <div class="news-date">
                     <div class="day"><?php echo get_the_date('d'); ?></div>
@@ -84,6 +89,7 @@ get_header();
                     <p><?php echo wp_trim_words(get_the_excerpt(), 20, '[...]'); ?></p>
                 </div>
             </div>
+            
             <?php
         }
         echo '</div>';
@@ -92,6 +98,7 @@ get_header();
         <div class="no-search-results-form section-inner thin">
             <?php
             get_search_form(array('aria_label' => __('search again', 'twentytwenty')));
+        
             ?>
         </div>
         <?php
