@@ -100,8 +100,10 @@
                 }
                 ?>
       </div>
+     
      </div>
     </div>
+    <?php comments_template(); ?>
     <!-- .news-item -->
    </article>
    <!-- .post -->
