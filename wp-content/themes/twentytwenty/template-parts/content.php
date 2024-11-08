@@ -83,4 +83,4 @@ if(!is_single())
 	}
 	?>
 
-</article><!-- .post -->
+</article>
