@@ -303,21 +303,23 @@
     .search-modal.active {
         display: block;
     }
+
     /* Đảm bảo rằng dropdown sẽ bị ẩn mặc định */
-.dropdown {
-    display: none; /* Ẩn dropdown */
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    min-width: 160px;
-}
+    .dropdown {
+        display: none;
+        /* Ẩn dropdown */
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        min-width: 160px;
+    }
 
-/* Hiển thị dropdown khi người dùng nhấn vào */
-.account:hover .dropdown {
-    display: block; /* Hiển thị dropdown khi hover */
-}
-
+    /* Hiển thị dropdown khi người dùng nhấn vào */
+    .account:hover .dropdown {
+        display: block;
+        /* Hiển thị dropdown khi hover */
+    }
 </style>

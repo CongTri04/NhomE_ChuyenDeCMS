@@ -23,15 +23,60 @@ if ( empty( $twentytwenty_aria_label ) && ! empty( $args['label'] ) ) {
 	$twentytwenty_aria_label = 'aria-label="' . esc_attr( $args['label'] ) . '"';
 }
 ?>
-<form role="search" <?php echo $twentytwenty_aria_label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?> method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<label for="<?php echo esc_attr( $twentytwenty_unique_id ); ?>">
-		<span class="screen-reader-text">
-			<?php
-			/* translators: Hidden accessibility text. */
-			_e( 'Search for:', 'twentytwenty' ); // phpcs:ignore: WordPress.Security.EscapeOutput.UnsafePrintingFunction -- core trusts translations
-			?>
-		</span>
-		<input type="search" id="<?php echo esc_attr( $twentytwenty_unique_id ); ?>" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'twentytwenty' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
-	</label>
-	<input type="submit" class="search-submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'twentytwenty' ); ?>" />
+<form role="search" <?php echo $twentytwenty_aria_label; ?> method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+    <div class="search-index">
+        <i class="fas fa-search"></i>
+        <label for="<?php echo esc_attr( $twentytwenty_unique_id ); ?>" class="screen-reader-text">
+            <?php
+            /* translators: Hidden accessibility text. */
+            _e( 'Search for:', 'twentytwenty' );
+            ?>
+        </label>
+        <input type="search" id="<?php echo esc_attr( $twentytwenty_unique_id ); ?>" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'twentytwenty' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+        <button type="submit" class="search-submit">
+            <?php echo esc_attr_x( 'Search', 'submit button', 'twentytwenty' ); ?>
+        </button>
+    </div>
 </form>
+
+<style>
+    body {
+        background-color: #f5f0e6;
+        font-family: Arial, sans-serif;
+    }
+    .search-index {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        width: 700px;
+        margin: 50px auto;
+		padding-top: 20px;		
+    }
+    .search-index i {
+        font-size: 20px;
+        margin-right: 10px;
+        color: #333;
+    }
+    .search-index input {
+        border: none;
+        outline: none;
+        flex-grow: 1;
+        font-size: 16px;
+        color: #333;
+    }
+    .search-index button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .search-index button:hover {
+        background-color: #218838;
+    }
+</style>
+
