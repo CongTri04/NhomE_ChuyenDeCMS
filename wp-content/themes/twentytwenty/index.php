@@ -69,6 +69,8 @@ get_header();
         <?php
     }
 
+
+	
     if (have_posts()) {
         echo '<div class="news-container">';
         while (have_posts()) {
@@ -78,7 +80,7 @@ get_header();
 				<?php if (is_search() && has_post_thumbnail()): ?>
 					<div class="news-image">
 						<?php the_post_thumbnail('thumbnail'); ?> <!-- Hiển thị ảnh đại diện -->
-					</div>
+					</div> 
 				<?php endif; ?>
 				<div class="news-date">
 					<div class="day"><?php echo get_the_date('d'); ?></div>
