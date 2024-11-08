@@ -1,132 +1,193 @@
 <?php
 /**
- * The template file for displaying the comments and comment form for the
- * Twenty Twenty theme.
+ * Template for displaying comments and post form
  *
  * @package WordPress
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
 
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
-*/
-if ( post_password_required() ) {
-	return;
+if (post_password_required()) {
+    return;
 }
 
-if ( $comments ) {
-	?>
+?>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
 
-	<div class="comments" id="comments">
+    .post-container, .comments {
+        width: 700px;
+        max-width: 100%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+		
+    }
 
-		<?php
-		$comments_number = get_comments_number();
-		?>
+    .post-header, .comments-header {
+        background-color: #f1f1f1;
+        padding: 23px;
+        border-bottom: none;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
 
-		<div class="comments-header section-inner small max-percentage">
+    .post-body h2, .comment-reply-title {
+        margin: 0;
+        font-size: 16px;
+        color: #333;
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        position: relative;
+        top: -25.8px;
+        font-weight: normal;
+        background-color: #fff;
+        border-bottom: none;
+        opacity: 0.9;
+    }
 
-			<h2 class="comment-reply-title">
-			<?php
-			if ( ! have_comments() ) {
-				_e( 'Leave a comment', 'twentytwenty' );
-			} elseif ( '1' === $comments_number ) {
-				/* translators: %s: Post title. */
-				printf( _x( 'One reply on &ldquo;%s&rdquo;', 'comments title', 'twentytwenty' ), get_the_title() );
-			} else {
-				printf(
-					/* translators: 1: Number of comments, 2: Post title. */
-					_nx(
-						'%1$s reply on &ldquo;%2$s&rdquo;',
-						'%1$s replies on &ldquo;%2$s&rdquo;',
-						$comments_number,
-						'comments title',
-						'twentytwenty'
-					),
-					number_format_i18n( $comments_number ),
-					get_the_title()
-				);
-			}
+    .post-body, .comments-inner {
+        padding: 15px;
+        position: relative;
+        top: -20px;
+    }
 
-			?>
-			</h2><!-- .comments-title -->
+    .post-body textarea, .comments-inner textarea {
+        width: 100%;
+        height: 80px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 14px;
+        resize: none;
+    }
 
-		</div><!-- .comments-header -->
+    .post-footer, .comments-pagination {
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 15px;
+        margin-top: -10px;
+    }
 
-		<div class="comments-inner section-inner thin max-percentage">
+    .share-button, .comments-pagination a {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 12px 15px;
+        font-size: 14px;
+        font-weight: normal;
+        margin-bottom: 3px;
+        text-decoration: none;
+		margin-top: 4%;
+		margin-left: 88%;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-			<?php
-			wp_list_comments(
-				array(
-					'walker'      => new TwentyTwenty_Walker_Comment(),
-					'avatar_size' => 120,
-					'style'       => 'div',
-				)
-			);
+    .share-button:hover, .comments-pagination a:hover {
+        background-color: #0056b3;
+    }
 
-			$comment_pagination = paginate_comments_links(
-				array(
-					'echo'      => false,
-					'end_size'  => 0,
-					'mid_size'  => 0,
-					'next_text' => __( 'Newer Comments', 'twentytwenty' ) . ' <span aria-hidden="true">&rarr;</span>',
-					'prev_text' => '<span aria-hidden="true">&larr;</span> ' . __( 'Older Comments', 'twentytwenty' ),
-				)
-			);
+    /* Additional styling for comments */
+    .comments-inner h2 {
+        font-size: 20px;
+        color: #555;
+        margin-bottom: 10px;
+        text-align: left;
+    }
 
-			if ( $comment_pagination ) {
-				$pagination_classes = '';
+    .comments-inner ul {
+        list-style-type: none;
+        padding: 0;
+    }
 
-				// If we're only showing the "Next" link, add a class indicating so.
-				if ( false === strpos( $comment_pagination, 'prev page-numbers' ) ) {
-					$pagination_classes = ' only-next';
-				}
-				?>
+    .comments-inner li.comment-item {
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #333;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+</style>
 
-				<nav class="comments-pagination pagination<?php echo $pagination_classes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output ?>" aria-label="<?php esc_attr_e( 'Comments', 'twentytwenty' ); ?>">
-					<?php echo wp_kses_post( $comment_pagination ); ?>
-				</nav>
+<!-- Comments Section -->
+<div class="comments" id="comments">
+    <?php
+    $comments_number = get_comments_number();
+    ?>
+    <div class="comments-header section-inner small max-percentage">
+        <h2 class="comment-reply-title">
+            <?php
+            if (! have_comments()) {
+                _e('Leave a comment', 'twentytwenty');
+            } elseif ('1' === $comments_number) {
+                printf(_x('One reply on &ldquo;%s&rdquo;', 'comments title', 'twentytwenty'), get_the_title());
+            } else {
+                printf(
+                    _nx(
+                        '%1$s reply on &ldquo;%2$s&rdquo;',
+                        '%1$s replies on &ldquo;%2$s&rdquo;',
+                        $comments_number,
+                        'comments title',
+                        'twentytwenty'
+                    ),
+                    number_format_i18n($comments_number),
+                    get_the_title()
+                );
+            }
+            ?>
+        </h2>
+    </div>
 
-				<?php
-			}
-			?>
+    <div class="comments-inner section-inner thin max-percentage">
+        <h2>Comments</h2>
+        <hr>
+        <ul>
+            <?php
+            wp_list_comments(
+                array(
+                    'walker' => new TwentyTwenty_Walker_Comment(),
+                    'avatar_size' => 0,
+                    'style' => 'ul',
+                    'callback' => function ($comment, $args, $depth) {
+                        echo '<li class="comment-item">' . get_comment_text($comment) . '</li>';
+                    }
+                )
+            );
+            ?>
+        </ul>
+    </div>
+</div>
 
-		</div><!-- .comments-inner -->
-
-	</div><!-- comments -->
-
-	<?php
-}
-
-if ( comments_open() || pings_open() ) {
-
-	if ( $comments ) {
-		echo '<hr class="styled-separator is-style-wide" aria-hidden="true" />';
-	}
-
-	comment_form(
-		array(
-			'class_form'         => 'section-inner thin max-percentage',
-			'title_reply_before' => '<h2 id="reply-title" class="comment-reply-title">',
-			'title_reply_after'  => '</h2>',
-		)
-	);
-
-} elseif ( is_single() ) {
-
-	if ( $comments ) {
-		echo '<hr class="styled-separator is-style-wide" aria-hidden="true" />';
-	}
-
-	?>
-
-	<div class="comment-respond" id="respond">
-
-		<p class="comments-closed"><?php _e( 'Comments are closed.', 'twentytwenty' ); ?></p>
-
-	</div><!-- #respond -->
-
-	<?php
-}
+<!-- Post Form Section -->
+<div class="post-container">
+    <div class="post-header">
+        <!-- Header content if any -->
+    </div>
+    <div class="post-body">
+        <h2>Make a Post</h2>
+        <?php
+        comment_form(
+			array(
+				'class_form'         => 'section-inner thin max-percentage',
+				'title_reply'        => '',
+				'comment_field'      => '<textarea placeholder="What are you thinking..." name="comment" class="comment-textarea"></textarea>',
+				'title_reply_before' => '',
+				'title_reply_after'  => '',
+				'label_submit'       => '',
+				'submit_button'      => '<a href="#" onclick="document.getElementById(\'commentform\').submit();" class="share-button">Share</a>',
+				'submit_field'       => '%1$s %2$s',
+			)
+		);
+        ?>
+    </div>
+</div>
